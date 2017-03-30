@@ -39,6 +39,15 @@ Theta2_grad = zeros(size(Theta2));
 %         cost function computation is correct by verifying the cost
 %         computed in ex4.m
 %
+Y = eye(num_labels)(y, :);
+A1 = [ones(m, 1) X];
+Z2 = A1*Theta1';
+A2 = [ones(m, 1) sigmoid(Z2)];
+Z3 = A2*Theta2';
+A3 = sigmoid(Z3);
+J = sum(sum(-Y.*log(A3)-(1-Y).*log(1-A3)))/m;
+
+
 % Part 2: Implement the backpropagation algorithm to compute the gradients
 %         Theta1_grad and Theta2_grad. You should return the partial derivatives of
 %         the cost function with respect to Theta1 and Theta2 in Theta1_grad and
