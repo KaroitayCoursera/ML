@@ -45,7 +45,7 @@ Z2 = A1*Theta1';
 A2 = [ones(m, 1) sigmoid(Z2)];
 Z3 = A2*Theta2';
 A3 = sigmoid(Z3);
-J = sum(sum(-Y.*log(A3)-(1-Y).*log(1-A3)))/m;
+J = sum(sum(-Y.*log(A3)-(1-Y).*log(1-A3)))/m + (lambda/2/m)*(sum(sum(Theta1(:, 2:end).^2)) + sum(sum(Theta2(:, 2:end).^2)));
 
 
 % Part 2: Implement the backpropagation algorithm to compute the gradients
