@@ -62,6 +62,10 @@ J = sum(sum(-Y.*log(A3)-(1-Y).*log(1-A3)))/m + (lambda/2/m)*(sum(sum(Theta1(:, 2
 %               over the training examples if you are implementing it for the 
 %               first time.
 %
+D3 = A3-Y;
+D2 = D3*Theta2(:, 2:end).*sigmoidGradient(Z2);
+Theta1_grad = (D2'*A1)/m;
+Theta2_grad = (D3'*A2)/m;
 % Part 3: Implement regularization with the cost function and gradients.
 %
 %         Hint: You can implement this around the code for
