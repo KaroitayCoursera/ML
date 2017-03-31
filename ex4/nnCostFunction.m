@@ -45,7 +45,7 @@ Z2 = A1*Theta1';
 A2 = [ones(m, 1) sigmoid(Z2)];
 Z3 = A2*Theta2';
 A3 = sigmoid(Z3);
-J = sum(sum(-Y.*log(A3)-(1-Y).*log(1-A3)))/m + (lambda/2/m)*(sum(sum(Theta1(:, 2:end).^2)) + sum(sum(Theta2(:, 2:end).^2)));
+J = sum(sum(-Y.*log(A3)-(1-Y).*log(1-A3)))/m;
 
 % Part 2: Implement the backpropagation algorithm to compute the gradients
 %         Theta1_grad and Theta2_grad. You should return the partial derivatives of
@@ -66,6 +66,7 @@ D3 = A3-Y;
 D2 = D3*Theta2(:, 2:end).*sigmoidGradient(Z2);
 Theta1_grad = (D2'*A1)/m;
 Theta2_grad = (D3'*A2)/m;
+
 % Part 3: Implement regularization with the cost function and gradients.
 %
 %         Hint: You can implement this around the code for
@@ -73,7 +74,7 @@ Theta2_grad = (D3'*A2)/m;
 %               the regularization separately and then add them to Theta1_grad
 %               and Theta2_grad from Part 2.
 %
-
+J = J + (lambda/2/m)*(sum(sum(Theta1(:, 2:end).^2)) + sum(sum(Theta2(:, 2:end).^2)));
 
 
 
