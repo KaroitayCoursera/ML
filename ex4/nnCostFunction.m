@@ -75,23 +75,10 @@ Theta2_grad = (D3'*A2)/m;
 %               and Theta2_grad from Part 2.
 %
 J = J + (lambda/2/m)*(sum(sum(Theta1(:, 2:end).^2)) + sum(sum(Theta2(:, 2:end).^2)));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Theta1(:, 1) = 0;
+Theta2(:, 1) = 0;
+Theta1_grad = Theta1_grad + Theta1*(lambda/m);
+Theta2_grad = Theta2_grad + Theta2*(lambda/m);
 
 % -------------------------------------------------------------
 
