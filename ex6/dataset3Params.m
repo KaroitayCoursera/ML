@@ -23,10 +23,21 @@ sigma = 0.3;
 %        mean(double(predictions ~= yval))
 %
 
-
-
-
-
+err = -1;
+VALS = [0.01, 0.03, 0.1, 0.3, 1, 3, 10, 30];
+for Ctmp = VALS
+	for sigmatmp = VALS
+		printf('dataset params C=%f sigma=%f\n', Ctmp, sigmatmp);
+		model= svmTrain(X, y, Ctmp, @(x1, x2) gaussianKernel(x1, x2, sigmatmp));
+		predictions = svmPredict(model, Xval);
+		errtmp = mean(double(predictions ~= yval));
+		if err<0 || errtmp<err
+			printf('new min error for params C=%f sigma=%f: %f\n', Ctmp, sigmatmp, errtmp);
+			C = Ctmp
+			sigma = sigmatmp
+			err = errtmp
+	end
+end
 
 
 % =========================================================================
